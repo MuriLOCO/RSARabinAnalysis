@@ -20,14 +20,20 @@ public class RsaRabinAnalysisApplication {
 		rsaEncryptDecrypt(1024);
 		rsaEncryptDecrypt(2048);
 		rsaEncryptDecrypt(4096);
+		rsaEncryptDecrypt(8192);
 	}
 	
 	private static void rsaEncryptDecrypt(int keySize) throws Exception {
 		System.out.println("------" + keySize + " key size! ------");
 		
+		long startTimeKeyCreation = System.nanoTime();
 		KeyPair keyPair = Utils.buildKeyPair(keySize);    
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
         RSAPrivateCrtKey privateKey = (RSAPrivateCrtKey) keyPair.getPrivate();
+        long endTimeKeyCreation = System.nanoTime();
+        long durationKeyCreation = (endTimeKeyCreation - startTimeKeyCreation)/1000000;
+        System.out.println("Key creation time: " + durationKeyCreation);
+        
         
         System.out.println("Public key: " + publicKey);
         System.out.println("Private key p: " + privateKey.getPrimeP());
@@ -36,35 +42,19 @@ public class RsaRabinAnalysisApplication {
     
         final String text = IOUtils.toString(Thread.currentThread().getContextClassLoader()
                 .getResourceAsStream("text.txt"), "UTF-8");        
-  
-        System.out.println("Text has: " + text.getBytes("UTF-8").length + " bytes.");
-        
-        long totalEncryption = Runtime.getRuntime().totalMemory()/1000000;        
-        //System.out.println("Total memory before Encryption: " + totalEncryption);   
         
         long startTimeEncrypt = System.nanoTime();
         byte [] encrypted = Utils.encrypt(privateKey, text);
         long endTimeEncrypt = System.nanoTime();
         long durationEncrypt = (endTimeEncrypt - startTimeEncrypt)/1000000;
-        System.out.println("Encryption time in ms: " + durationEncrypt);
-        System.out.println(new String(encrypted));  
-        long usedEncryption  = Runtime.getRuntime().totalMemory()/1000000 - Runtime.getRuntime().freeMemory()/1000000;
-        //System.out.println("Total memory after Encryption: " + usedEncryption);
-        long totalConsumedEncryption = totalEncryption - usedEncryption;
-       // System.out.println("Was consumed for Encryption: " + totalConsumedEncryption);
+        System.out.println("Encryption time in ms: " + durationEncrypt);                
         
         
-        
-        long totalDecryption = Runtime.getRuntime().totalMemory()/1000000;        
-        //System.out.println("Total memory before Decryption: " + totalDecryption);
         long startTimeDecrypt = System.nanoTime();
         byte[] secret = Utils.decrypt(publicKey, encrypted);
         long endTimeDecrypt = System.nanoTime();
         long durationDecrypt= (endTimeDecrypt - startTimeDecrypt)/1000000;
-        long usedDecryption  = Runtime.getRuntime().totalMemory()/1000000 - Runtime.getRuntime().freeMemory()/1000000;
-       // System.out.println("Total memory after Decryption: " + durationDecrypt);
-        long totalConsumedDecryption = totalDecryption - usedDecryption;
-       // System.out.println("Was consumed for Decryption: " + totalConsumedDecryption);
-        System.out.println(new String(secret));  
+        System.out.println("Deryption time in ms: " + durationDecrypt);  
+        
 	}
 }
