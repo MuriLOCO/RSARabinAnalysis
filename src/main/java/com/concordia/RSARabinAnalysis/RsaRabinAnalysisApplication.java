@@ -34,7 +34,7 @@ public class RsaRabinAnalysisApplication {
     RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
     RSAPrivateCrtKey privateKey = (RSAPrivateCrtKey) keyPair.getPrivate();
     long endTimeKeyCreation = System.nanoTime();
-    long durationKeyCreation = (endTimeKeyCreation - startTimeKeyCreation) / 1000000;
+    long durationKeyCreation = (endTimeKeyCreation - startTimeKeyCreation);
     System.out.println("Key creation time: " + durationKeyCreation);
 
     final String text = IOUtils.toString(Thread.currentThread().getContextClassLoader()
@@ -44,14 +44,14 @@ public class RsaRabinAnalysisApplication {
     long startTimeEncryptRSA = System.nanoTime();
     BigInteger encryptedRSA = Utils.encryptRSA(publicKey, text);
     long endTimeEncryptRSA = System.nanoTime();
-    long durationEncryptRSA = (endTimeEncryptRSA - startTimeEncryptRSA) / 1000000;
+    long durationEncryptRSA = (endTimeEncryptRSA - startTimeEncryptRSA);
     System.out.println("Encryption time RSA in ms: " + durationEncryptRSA);
 
     //Encrypting Rabin
     long startTimeEncryptRabin = System.nanoTime();
     BigInteger encryptedRabin = Utils.encryptRabin(publicKey, text);
     long endTimeEncryptRabin = System.nanoTime();
-    long durationEncryptRabin = (endTimeEncryptRabin - startTimeEncryptRabin) / 1000000;
+    long durationEncryptRabin = (endTimeEncryptRabin - startTimeEncryptRabin);
     System.out.println("Encryption time Rabin in ms: " + durationEncryptRabin);
 
     
@@ -59,23 +59,9 @@ public class RsaRabinAnalysisApplication {
     long startTimeDecryptRSA = System.nanoTime();
     Utils.decryptRSA(privateKey, encryptedRSA);
     long endTimeDecrypt = System.nanoTime();
-    long durationDecrypt = (endTimeDecrypt - startTimeDecryptRSA) / 1000000;
+    long durationDecrypt = (endTimeDecrypt - startTimeDecryptRSA);
     System.out.println("Deryption time RSA in ms: " + durationDecrypt);
 
   }
 
-  private static void rabinEncrptDecrypt(int keySize) throws Exception {
-    long startTimeKeyCreation = System.nanoTime();
-    KeyPair keyPair = Utils.buildRabinKeyPair(keySize);
-
-    RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-    RSAPrivateCrtKey privateKey = (RSAPrivateCrtKey) keyPair.getPrivate();
-    long endTimeKeyCreation = System.nanoTime();
-    long durationKeyCreation = (endTimeKeyCreation - startTimeKeyCreation) / 1000000;
-    System.out.println("Key creation time: " + durationKeyCreation);
-
-    final String text = IOUtils.toString(Thread.currentThread().getContextClassLoader()
-          .getResourceAsStream("text.txt"), "UTF-8");
-
-  }
 }
