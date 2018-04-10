@@ -54,13 +54,19 @@ public class RsaRabinAnalysisApplication {
     long durationEncryptRabin = (endTimeEncryptRabin - startTimeEncryptRabin);
     System.out.println("Encryption time Rabin in ms: " + durationEncryptRabin);
 
-    
     //Decrypting RSA
     long startTimeDecryptRSA = System.nanoTime();
     Utils.decryptRSA(privateKey, encryptedRSA);
-    long endTimeDecrypt = System.nanoTime();
-    long durationDecrypt = (endTimeDecrypt - startTimeDecryptRSA);
-    System.out.println("Deryption time RSA in ms: " + durationDecrypt);
+    long endTimeDecryptRSA = System.nanoTime();
+    long durationDecryptRSA = (endTimeDecryptRSA - startTimeDecryptRSA);
+    System.out.println("Deryption time RSA in ms: " + durationDecryptRSA);
+
+    //Decrypting Rabin
+    long startTimeDecryptRabin = System.nanoTime();
+    Utils.decryptRabin(privateKey, encryptedRabin);
+    long endTimeDecryptRabin = System.nanoTime();
+    long durationDecryptRabint = (endTimeDecryptRabin - startTimeDecryptRabin);
+    System.out.println("Deryption time Rabin in ms: " + durationDecryptRabint);
 
   }
 
