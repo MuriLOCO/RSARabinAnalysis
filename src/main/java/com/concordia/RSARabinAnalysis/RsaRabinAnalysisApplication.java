@@ -16,16 +16,20 @@ public class RsaRabinAnalysisApplication {
 
   public static void main(String[] args) throws Exception {
     SpringApplication.run(RsaRabinAnalysisApplication.class, args);
-    // rabinEncrptDecrypt(512);
-    rsaEncryptDecrypt(512);
-    rsaEncryptDecrypt(1024);
-    rsaEncryptDecrypt(2048);
-    rsaEncryptDecrypt(4096);
-    rsaEncryptDecrypt(8192);
-    rsaEncryptDecrypt(16384);
+
+    rsaRabinEncryptDecrypt(512);
+    rsaRabinEncryptDecrypt(1024);
+    rsaRabinEncryptDecrypt(2048);
+    rsaRabinEncryptDecrypt(4096);
+    rsaRabinEncryptDecrypt(8192);
   }
 
-  private static void rsaEncryptDecrypt(int keySize) throws Exception {
+  /**
+   * Performs the encryption and decryption analysis of RSA and Rabin
+   * @param keySize - Key Size
+   * @throws Exception
+   */
+  private static void rsaRabinEncryptDecrypt(int keySize) throws Exception {
     System.out.println("------" + keySize + " key size! ------");
 
     //Creation of Key
