@@ -49,28 +49,28 @@ public class RsaRabinAnalysisApplication {
     BigInteger encryptedRSA = Utils.encryptRSA(publicKey, text);
     long endTimeEncryptRSA = System.nanoTime();
     long durationEncryptRSA = (endTimeEncryptRSA - startTimeEncryptRSA);
-    System.out.println("Encryption time RSA in ms: " + durationEncryptRSA);
+    System.out.println("Encryption time RSA in nanoseconds: " + durationEncryptRSA);
 
     //Encrypting Rabin
     long startTimeEncryptRabin = System.nanoTime();
     BigInteger encryptedRabin = Utils.encryptRabin(publicKey, text);
     long endTimeEncryptRabin = System.nanoTime();
     long durationEncryptRabin = (endTimeEncryptRabin - startTimeEncryptRabin);
-    System.out.println("Encryption time Rabin in ms: " + durationEncryptRabin);
+    System.out.println("Encryption time Rabin in nanoseconds: " + durationEncryptRabin);
 
     //Decrypting RSA
     long startTimeDecryptRSA = System.nanoTime();
     Utils.decryptRSA(privateKey, encryptedRSA);
     long endTimeDecryptRSA = System.nanoTime();
     long durationDecryptRSA = (endTimeDecryptRSA - startTimeDecryptRSA);
-    System.out.println("Deryption time RSA in ms: " + durationDecryptRSA);
+    System.out.println("Deryption time RSA in nanoseconds: " + durationDecryptRSA);
 
     //Decrypting Rabin
     long startTimeDecryptRabin = System.nanoTime();
     Utils.decryptRabin(privateKey, encryptedRabin);
     long endTimeDecryptRabin = System.nanoTime();
     long durationDecryptRabint = (endTimeDecryptRabin - startTimeDecryptRabin);
-    System.out.println("Deryption time Rabin in ms: " + durationDecryptRabint);
+    System.out.println("Deryption time Rabin in nanoseconds: " + durationDecryptRabint);
 
   }
 
